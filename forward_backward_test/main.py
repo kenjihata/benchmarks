@@ -53,12 +53,20 @@ for i in range(args.num_iterations):
     inputs = Variable(torch.rand(args.batch_size, 3, args.image_height, args.image_width))
     if args.cuda:
         inputs = inputs.cuda()
+        torch.cuda.synchronize()
     start_time = datetime.now()
     outputs = model(inputs)
+    if args.cuda:
+        torch.cuda.synchronize()
     forward_time = millis(start_time)
-    grad = torch.rand(outputs.size()).cuda()
+    grad = torch.rand(outputs.size())
+    if args.cuda:
+        grad = grad.cuda()
+        torch.cuda.synchronize()
     start_time = datetime.now()
     outputs.backward(gradient=grad)
+    if args.cuda:
+        torch.cuda.synchronize()
     backward_time = millis(start_time)
     if i > 0:
         forward_times.append(forward_time)
