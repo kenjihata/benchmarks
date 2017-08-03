@@ -22,7 +22,7 @@ parser.add_argument('--weight_decay', type=float, default=5e-4,
     help='Weight decay')
 parser.add_argument('--batch_size', type=int, default=128,
     help='The batch size')
-parser.add_argument('--cifar_path', type=str, default='data',
+parser.add_argument('--cifar_path', type=str, default='../data',
     help='The path to the CIFAR10 dataset')
 parser.add_argument('--num_workers', type=int, default=0,
     help='The number of workers to load the data')
